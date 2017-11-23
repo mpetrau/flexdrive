@@ -1,5 +1,5 @@
 class VehiclesController < ApplicationController
-  before_action :set_vehicle, only: [:show, :edit,]
+  before_action :set_vehicle, only: [:show, :edit, :update]
 
   def index
     @vehicles = Vehicle.all
@@ -13,9 +13,9 @@ class VehiclesController < ApplicationController
   end
 
   def create
+
     @vehicle = Vehicle.new(vehicle_params)
-    if @vehicle.valid?
-      @vehicle.save
+    if @vehicle.save
       redirect_to vehicle_path(@vehicle)
     else
       render :new
@@ -26,8 +26,8 @@ class VehiclesController < ApplicationController
   end
 
   def update
-    if @restaurant.update(restaurant_params)
-      redirect_to restaurant_path(@restaurant)
+    if @vehicle.update(vehicle_params)
+      redirect_to vehicle_path(@vehicle)
     else
       render :edit
     end

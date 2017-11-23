@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <%= link_to "FlexDrive", "/", {class: "navbar-brand" } %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <!-- Offer button -->
+      <%= link_to "Offers", offers_path, {class: "btn #{'btn-primary' if controller?('offers')}"} %>
+      <!-- Vehicles btn group -->
+      <div class="btn-group">
+        <%= link_to "Vehicles", vehicles_path, {type: "button", class: "btn #{'btn-primary' if controller?('vehicles')}"} %>
+          <button type="button" class="btn <%= controller?('vehicles')? 'btn-primary' : 'btn-link' %> dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          </button>
+        <div class="dropdown-menu">
+          <%= link_to "Add new vehicle", new_vehicle_path, {class: "dropdown-item"} %>
+        </div>
+      </div>
+      <!-- Inactive links -->
+      <%= link_to "Customers", "#", {class: "nav-item nav-link disabled"} %>
+      <%= link_to "Bookings", "#", {class: "nav-item nav-link disabled"} %>
+    </div>
+  </div>
+</nav>
+
+
+

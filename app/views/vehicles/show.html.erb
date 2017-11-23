@@ -1,9 +1,10 @@
 <h1>Vehicles#show</h1>
 <p>Find me in app/views/vehicles/show.html.erb</p>
+<%= link_to "all vehicles", vehicles_path %>
 <ul>
   <li>Make: <%= @vehicle.make %></li>
   <li>Model: <%= @vehicle.model %></li>
   <li>Offer: <%= @vehicle.offer.name %></li>
   <li>Status: <%= @vehicle.status %></li>
 </ul>
-<%= link_to "all vehicles", vehicles_path %>
+<%= link_to "edit", edit_vehicle_path(@vehicle) %>
