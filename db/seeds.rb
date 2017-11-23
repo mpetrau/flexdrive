@@ -15,5 +15,5 @@ Person.destroy_all
 steve = Person.create(address:"Paris", email:"test@test.com", firstName: "Steve", surName: "Johny")
 green = Offer.create(price: 125, name: "Green Thumb", description: "perfect choice for Eco conscious!", status: "active")
 contract1 = Contract.create(person: steve, offer: green, startDate: Date.today, status: "active")
-golf = Vehicle.create(offer: green, make: "VW", model: "e-Golf", colour: "white", manufactureYear: 2016, KM: 4300, fuelType: "electric", enginePower: 75, status: "in use")
+golf = Vehicle.create(offer: green, make: "VW", model: "e-Golf", colour: "white", manufactureYear: 2016, KM: 4300, fuelType: "electric", enginePower: 75, status: "in use", licensePlate: "X16XVJ")
 bookingSteve1 = Booking.create(contract: contract1, startDate: Date.today, vehicle: golf, status: "active")
