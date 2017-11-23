@@ -5,6 +5,13 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# frontend gems
+gem "bootstrap",'~> 4.0.0.beta2.1'
+gem 'jquery-rails'
+gem "font-awesome-sass"
+gem "simple_form"
+gem "autoprefixer-rails"
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
@@ -36,6 +43,8 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 group :development do
