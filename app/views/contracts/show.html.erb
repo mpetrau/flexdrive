@@ -1,0 +1,7 @@
+<h3>Here is your contract details:</h3>
+<h4>Name: </h4><p><%= @contract.person.firstName %></p>
+<h4>Surname: </h4><p><%= @contract.person.surName %></p>
+<h4>Status: </h4><p><%= @contract.status %></p>
+<h4>Discount (in %): </h4><p><%= @contract.discount %></p>
+<h4>List price: </h4> <p><%= @contract.offer.price %></p>
+<%= link_to "Edit", edit_contract_path(@contract) %>

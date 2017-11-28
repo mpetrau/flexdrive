@@ -1,0 +1,14 @@
+<h2>Here are your contracts</h2>
+<%= link_to "Create new", new_contract_path %>
+<ul>
+  <% @contracts.each do |contract| %>
+    <li>
+      <h3><%= contract.person.firstName %> <%= contract.person.surName %></h3>
+      <p>Status: <b><%= contract.status %></b></p>
+      <p>Offer: <b><%= contract.offer.name %></b></p>
+      <p>Offer price: <b><%= contract.offer.price %></b></p>
+      <p>Discount: <b><%= contract.discount %></b></p>
+      <%= link_to "See more", contract_path(contract) %>
+    </li>
+  <% end %>
+</ul>

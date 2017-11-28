@@ -30,11 +30,10 @@ ActiveRecord::Schema.define(version: 20171123193114) do
 
   create_table "contracts", force: :cascade do |t|
     t.date "startDate"
-    t.integer "discount"
+    t.integer "discount", default: 0
+    t.string "status"
     t.bigint "offer_id"
     t.bigint "person_id"
-    t.string "status"
-    t.string "new"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["offer_id"], name: "index_contracts_on_offer_id"

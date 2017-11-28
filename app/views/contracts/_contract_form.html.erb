@@ -1,0 +1,11 @@
+<%= simple_form_for @contract do |f| %>
+  <%= f.input :startDate %>
+  <%= f.input :discount %>
+  <%= f.input :status, collection: Contract::CONTRACT_STATUS, prompt: "Choose contract status" %>
+  <%= f.association :offer, prompt: "Choose offer package" %>
+  <%= f.association :person, prompt: "Choose contract owner" %>
+
+  <%= f.submit "Save" %>
+<% end %>
+
+

@@ -17,7 +17,7 @@
         </div>
       </div>
       <!-- Inactive links -->
-      <%= link_to "Customers", "#", {class: "nav-item nav-link disabled"} %>
+      <%= link_to "Contracts", contracts_path, {class: "btn #{'btn-primary' if controller?('contracts')}"} %>
       <%= link_to "Bookings", "#", {class: "nav-item nav-link disabled"} %>
     </div>
   </div>
