@@ -5,21 +5,20 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <!-- Offer button -->
-      <%= link_to "Offers", offers_path, {class: "btn #{'btn-primary' if controller?('offers')}"} %>
-      <!-- Vehicles btn group -->
-      <div class="btn-group">
-        <%= link_to "Vehicles", vehicles_path, {type: "button", class: "btn #{'btn-primary' if controller?('vehicles')}"} %>
-          <button type="button" class="btn <%= controller?('vehicles')? 'btn-primary' : 'btn-link' %> dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          </button>
-        <div class="dropdown-menu">
-          <%= link_to "Add new vehicle", new_vehicle_path, {class: "dropdown-item"} %>
-        </div>
+      <div class="float-right">
+        <% if user_signed_in? %>
+        <!-- Avatar with dropdown menu -->
+        <%= link_to destroy_user_session_path, method: :delete do %>
+          <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+        <% end %>
+
+
+    <% else %>
+      <!-- Login link (when logged out) -->
+      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "nav-item nav-link" %>
+      <% end %>
       </div>
-      <!-- Inactive links -->
-      <%= link_to "Contracts", contracts_path, {class: "btn #{'btn-primary' if controller?('contracts')}"} %>
-      <%= link_to "Bookings", "#", {class: "nav-item nav-link disabled"} %>
-    </div>
+      </div>
   </div>
 </nav>
 
