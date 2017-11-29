@@ -12,10 +12,12 @@ gem "font-awesome-sass"
 gem "simple_form"
 gem "autoprefixer-rails"
 
-# authentication and authorizations
+# authentication and authorizations and admin
 gem 'devise'
 gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+gem 'pundit'
+gem "simple_token_authentication"
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
