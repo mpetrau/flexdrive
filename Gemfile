@@ -14,7 +14,8 @@ gem "autoprefixer-rails"
 
 # authentication and authorizations
 gem 'devise'
-
+gem 'pundit'
+gem "simple_token_authentication"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
