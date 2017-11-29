@@ -14,6 +14,8 @@ gem "autoprefixer-rails"
 
 # authentication and authorizations
 gem 'devise'
+gem 'activeadmin', github: 'activeadmin/activeadmin'
+gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

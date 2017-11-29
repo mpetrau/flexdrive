@@ -4,4 +4,8 @@ class Person < ApplicationRecord
   has_many :vehicles, through: :orders
 
   validates :firstName, :surName, presence: true
+
+  def name
+    "#{firstName} #{surName}"
+  end
 end
