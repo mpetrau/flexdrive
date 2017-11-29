@@ -10,73 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123193114) do
+ActiveRecord::Schema.define(version: 20171129182506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "bookings", force: :cascade do |t|
-    t.date "startDate"
-    t.integer "duration", default: 31
-    t.integer "KMdriven", default: 0
-    t.bigint "contract_id"
-    t.bigint "vehicle_id"
-    t.string "status", default: "requested"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["contract_id"], name: "index_bookings_on_contract_id"
-    t.index ["vehicle_id"], name: "index_bookings_on_vehicle_id"
-  end
-
-  create_table "contracts", force: :cascade do |t|
-    t.date "startDate"
-    t.integer "discount", default: 0
-    t.string "status"
-    t.bigint "offer_id"
+  create_table "emails", force: :cascade do |t|
+    t.string "emailAddress"
     t.bigint "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["offer_id"], name: "index_contracts_on_offer_id"
-    t.index ["person_id"], name: "index_contracts_on_person_id"
+    t.index ["person_id"], name: "index_emails_on_person_id"
   end
 
-  create_table "offers", force: :cascade do |t|
-    t.integer "price", default: 0
-    t.string "name"
-    t.string "description"
-    t.string "status", default: "draft"
+  create_table "orders", force: :cascade do |t|
+    t.bigint "vehicle_id"
+    t.bigint "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_orders_on_person_id"
+    t.index ["vehicle_id"], name: "index_orders_on_vehicle_id"
   end
 
   create_table "people", force: :cascade do |t|
-    t.string "address"
-    t.string "email"
-    t.string "firstName"
     t.string "surName"
+    t.string "firstName"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "vehicles", force: :cascade do |t|
     t.string "make"
-    t.string "model"
+    t.string "modelRange"
+    t.string "modelVariant"
     t.string "colour"
-    t.integer "manufactureYear"
-    t.integer "KM", default: 0
-    t.string "fuelType"
-    t.integer "enginePower"
-    t.string "status", default: "available"
-    t.bigint "offer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "licensePlate"
-    t.index ["offer_id"], name: "index_vehicles_on_offer_id"
   end
 
-  add_foreign_key "bookings", "contracts"
-  add_foreign_key "bookings", "vehicles"
-  add_foreign_key "contracts", "offers"
-  add_foreign_key "contracts", "people"
-  add_foreign_key "vehicles", "offers"
+  add_foreign_key "emails", "people"
+  add_foreign_key "orders", "people"
+  add_foreign_key "orders", "vehicles"
 end
