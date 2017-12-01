@@ -18,10 +18,17 @@ class Api::V1::OrdersController < Api::V1::BaseController
   end
 
   def create
-    @order = Order.new(order_params)
-    authorize @order
-    if @order.save(order_params)
-      render :show
+    @vehicle = Vehicle.new(vehicle_params)
+    @person = Person.new(person_params)
+    # byebug
+    if @vehicle.save && @person.save
+      @order = Order.new(vehicle: @vehicle, person: @person)
+      authorize @order
+      if @order.save
+        render :show
+      else
+        render_error
+      end
     else
       render_error
     end
@@ -35,8 +42,22 @@ class Api::V1::OrdersController < Api::V1::BaseController
   end
 
   def order_params
-    params.require(:order).permit(:vehicle_id, :person_id)
+    params.require(:Order).permit(:vehicle_id, :person_id)
   end
+
+  def vehicle_params
+    params.require(:Vehicle).permit(:make, :modelVariant, :modelRange, :colour)
+  end
+
+  def person_params
+    params.require(:Person).require(:Name).permit(:firstName,:surName)
+    # params.require(:person).permit(name: [:firstName, :surname])
+    # params.require(:person).permit({email_attributes: [:emailAddress, :id]}, name: [:firstName, :surname])
+  end
+
+  # def email_params
+  #   params.require(:person).permit( { email: [] } )
+  # end
 
   def render_error
     render json: { errors: @order.errors.full_messages },

@@ -27,5 +27,8 @@ module Flexdrive
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # log unpermitted parameters
+    config.action_controller.action_on_unpermitted_parameters = :log
   end
 end
