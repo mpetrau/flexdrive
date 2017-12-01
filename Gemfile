@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+ruby '2.4.2'
+
 # frontend gems
 gem "bootstrap",'~> 4.0.0.beta2.1'
 gem 'jquery-rails'
@@ -21,7 +23,6 @@ gem "simple_token_authentication"
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem ruby '2.4.2'
 gem 'rails', '~> 5.1.4'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
