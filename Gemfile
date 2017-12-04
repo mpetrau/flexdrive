@@ -1,11 +1,11 @@
+ruby '2.4.2'
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
-
-ruby '2.4.2'
 
 # frontend gems
 gem "bootstrap",'~> 4.0.0.beta2.1'
@@ -20,7 +20,7 @@ gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'pundit'
 gem "simple_token_authentication"
-
+gem 'figaro'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
