@@ -2,9 +2,9 @@ class Api::V1::OrdersController < Api::V1::BaseController
   acts_as_token_authentication_handler_for User, except: [ :index ]
   before_action :set_order, only: [:show, :update]
 
-  def index
-    @orders = policy_scope(Order)
-  end
+  # def index
+  #   @orders = policy_scope(Order)
+  # end
 
   def show
   end
