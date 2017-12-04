@@ -10,7 +10,9 @@ class Api::V1::OrdersController < Api::V1::BaseController
   end
 
   def update
-    if @order.update(order_params)
+    @vehicle = @order.vehicle.update(vehicle_params) if params[:Vehicle]
+    @person = @order.person.update(person_params) if params[:Person]
+    if @vehicle || @person
       render :show
     else
       render_error
@@ -20,7 +22,6 @@ class Api::V1::OrdersController < Api::V1::BaseController
   def create
     @vehicle = Vehicle.new(vehicle_params)
     @person = Person.new(person_params)
-    # byebug
     if @vehicle.save && @person.save
       @order = Order.new(vehicle: @vehicle, person: @person)
       authorize @order
