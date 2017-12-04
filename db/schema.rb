@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171203235531) do
+ActiveRecord::Schema.define(version: 20171204222417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,30 @@ ActiveRecord::Schema.define(version: 20171203235531) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
+  create_table "addresses", force: :cascade do |t|
+    t.string "addressType"
+    t.string "buildingName"
+    t.string "streetName"
+    t.string "streetNumber"
+    t.string "streetNumberSuffix"
+    t.string "postalCode"
+    t.string "city"
+    t.string "province"
+    t.string "country"
+    t.bigint "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_addresses_on_person_id"
+  end
+
+  create_table "bank_accounts", force: :cascade do |t|
+    t.string "BAN"
+    t.string "BIC"
+    t.string "IBAN"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "emails", force: :cascade do |t|
     t.string "emailAddress"
     t.bigint "person_id"
@@ -42,6 +66,8 @@ ActiveRecord::Schema.define(version: 20171203235531) do
     t.bigint "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "bank_account_id"
+    t.index ["bank_account_id"], name: "index_orders_on_bank_account_id"
     t.index ["person_id"], name: "index_orders_on_person_id"
     t.index ["vehicle_id"], name: "index_orders_on_vehicle_id"
   end
@@ -51,6 +77,9 @@ ActiveRecord::Schema.define(version: 20171203235531) do
     t.string "firstName"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "salutation"
+    t.string "firstNameInitials"
+    t.string "birthDate"
   end
 
   create_table "products", force: :cascade do |t|
@@ -58,6 +87,17 @@ ActiveRecord::Schema.define(version: 20171203235531) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "telephones", force: :cascade do |t|
+    t.string "telephoneNumber"
+    t.string "telephoneNumberType"
+    t.string "countryCode"
+    t.boolean "defaultTelephoneNumber"
+    t.bigint "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_telephones_on_person_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -89,7 +129,10 @@ ActiveRecord::Schema.define(version: 20171203235531) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "addresses", "people"
   add_foreign_key "emails", "people"
+  add_foreign_key "orders", "bank_accounts"
   add_foreign_key "orders", "people"
   add_foreign_key "orders", "vehicles"
+  add_foreign_key "telephones", "people"
 end
