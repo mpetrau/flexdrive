@@ -6,8 +6,9 @@ class Person < ApplicationRecord
   has_many :vehicles, through: :orders
   has_many :bank_accounts, through: :orders
 
-  accepts_nested_attributes_for :emails
-  accepts_nested_attributes_for :telephones
+  accepts_nested_attributes_for :emails, allow_destroy: true
+  accepts_nested_attributes_for :telephones, allow_destroy: true
+  accepts_nested_attributes_for :address, allow_destroy: true
 
   validates :firstName, :surName, presence: true
 
