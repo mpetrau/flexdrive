@@ -40,4 +40,32 @@ ActiveAdmin.register Person do
       f.actions
     end
 
+    # Customize the Show page. Needs to be moved into a partial later.
+    show do
+
+      attributes_table do
+        rows :salutation, :firstName, :surName
+        person.emails.each.with_index(1) do |email, index|
+          row "Email #{index}" do email.emailAddress end
+        end
+        person.telephones.each.with_index(1) do |phone, index|
+          row "Phone #{index}" do phone.telephoneNumber end
+        end
+        person.address do |address|
+          row "Address" do address.postalCode end
+        end
+        row :address
+
+        # panel "Address" do
+        #   table_for person.address do
+        #     column :postalCode
+        #     column :city
+        #     column :country
+        #   end
+        # end
+      end
+
+      active_admin_comments
+    end
+
 end
