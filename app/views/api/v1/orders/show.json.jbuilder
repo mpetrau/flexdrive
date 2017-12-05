@@ -16,9 +16,10 @@ json.Person do |json|
   json.Address address, :addressType, :buildingName, :streetNumber, :streetName, :streetNumberSuffix, :postalCode, :city, :province, :country if address.presence
 end
 
-
 json.Vehicle do |json|
   json.extract! @order.vehicle, :make, :modelRange, :modelVariant, :colour
 end
 
-
+json.BankAccount do |json|
+  json.extract! @order.bank_account, :BAN, :BIC, :IBAN if @order.bank_account.presence
+end
