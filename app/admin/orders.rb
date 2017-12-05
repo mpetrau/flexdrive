@@ -1,5 +1,5 @@
 ActiveAdmin.register Order do
 
-  permit_params :vehicle_id, :person_id
+  permit_params :vehicle_id, :person_id, :bank_account_id
 
 end
