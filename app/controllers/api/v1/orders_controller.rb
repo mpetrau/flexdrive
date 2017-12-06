@@ -22,11 +22,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
   def create
     @vehicle = Vehicle.new(vehicle_params)
     @person = Person.new(person_params)
-    p '-------------------------------'
-    p person_params
-    # byebug
     @bank_account = BankAccount.new(bank_account_params)
-
     if @vehicle.save && @person.save && @bank_account.save
       @order = Order.new(vehicle: @vehicle, person: @person, bank_account: @bank_account)
       authorize @order
