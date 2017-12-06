@@ -22,8 +22,13 @@ class Api::V1::OrdersController < Api::V1::BaseController
   def create
     @vehicle = Vehicle.new(vehicle_params)
     @person = Person.new(person_params)
-    if @vehicle.save && @person.save
-      @order = Order.new(vehicle: @vehicle, person: @person)
+    p '-------------------------------'
+    p person_params
+    # byebug
+    @bank_account = BankAccount.new(bank_account_params)
+
+    if @vehicle.save && @person.save && @bank_account.save
+      @order = Order.new(vehicle: @vehicle, person: @person, bank_account: @bank_account)
       authorize @order
       if @order.save
         render :show
@@ -50,10 +55,22 @@ class Api::V1::OrdersController < Api::V1::BaseController
     params.require(:Vehicle).permit(:make, :modelVariant, :modelRange, :colour)
   end
 
+  def bank_account_params
+    params.require(:BankAccount).permit(:IBAN, :BIC, :BAN)
+  end
+
   def person_params
-    params.require(:Person).require(:Name).permit(:firstName,:surName)
-    # params.require(:person).permit(name: [:firstName, :surname])
-    # params.require(:person).permit({email_attributes: [:emailAddress, :id]}, name: [:firstName, :surname])
+    # params.require(:Person).permit(:Name, :Email).tap do |whitelisted|
+    #   whitelisted[:firstName, :surName] = params[:Person][:Name]
+    # end
+
+    # each works individually, but still cannot create a contract. Something breaks when trying to create Email.
+    whitelisted = params.require(:Person).require(:Name).permit(:firstName,:surName)
+    params[:Person][:emails_attributes] = params[:Person][:Email]
+    params[:Person].merge!(whitelisted)
+    params.require(:Person).permit(:firstName, :surName, emails_attributes: [:id,:emailAddress, :_destroy])
+
+
   end
 
   # def email_params
